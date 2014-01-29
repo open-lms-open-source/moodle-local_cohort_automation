@@ -125,6 +125,7 @@ $table = new html_table();
 $table->head = array(
     get_string('cohorttable', 'local_cohort_automation'),
     get_string('profilefieldtable', 'local_cohort_automation'),
+    get_string('membercounttable', 'local_cohort_automation'),
     get_string('regextable', 'local_cohort_automation'),
     get_string('deletetable', 'local_cohort_automation')
 );
@@ -151,6 +152,7 @@ if (count($records) > 0) {
         $mappings[] = array(
              $record->name,
              $profilefields[$record->profilefieldid],
+             $DB->count_records('cohort_members', array('cohortid' => $record->cohortid)),
              $record->regex,
              $OUTPUT->action_link(
                  $linkurl,

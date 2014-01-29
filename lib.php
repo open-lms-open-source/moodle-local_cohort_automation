@@ -74,3 +74,21 @@ function local_cohort_automation_cron () {
 
     return true;
 }
+
+/**
+ * Function to handle the delete cohort event
+ *
+ * @param $eventdata the data related to the event
+ *
+ * @return boolean the result of handling the event
+ */
+function local_cohort_automation_event_delete($eventdata) {
+
+    global $DB;
+
+    // Play nice and attempt to tidy up mappings table.
+    $DB->delete_records('local_cohort_automation', array('cohortid' => $eventdata->id));
+
+    return true;
+
+}

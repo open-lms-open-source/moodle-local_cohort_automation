@@ -60,7 +60,9 @@ function get_users_not_in_cohort($cohortid, $profilefieldid, $regex) {
             WHERE u.id NOT IN (SELECT cm.userid
                                FROM {cohort_members} cm
                                WHERE cohortid = ?)
-           AND u.' . $fields[$profilefieldid] . ' ' . $DB->sql_regex(true) . ' ?';
+            AND u.' . $fields[$profilefieldid] . ' ' . $DB->sql_regex(true) . ' ?
+            AND u.deleted <> 1
+            AND u.suspended <> 1';
 
     try {
         return $DB->get_recordset_sql($sql, array($cohortid, $regex));
@@ -95,7 +97,7 @@ function get_users_in_cohort($cohortid, $profilefieldid, $regex) {
     try {
         return $DB->get_recordset_sql($sql, array($cohortid, $regex));
     } catch (Exception $e) {
-        mtrace('Exception thrown while trying to find users not in a cohort: ' . $e->getMessage());
+        mtrace('Exception thrown while trying to find users in a cohort: ' . $e->getMessage());
         return array();
     }
 }

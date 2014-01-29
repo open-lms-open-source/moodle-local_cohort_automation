@@ -14,20 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
- * Defines the version of cohort_automation
+ * Library of functions that respond to events in Moodle
  *
- * This code fragment is called by moodle_needs_upgrading() and
- * /admin/index.php
- *
- * @package    local_auto_cohort_maint
+ * @package    local_cohort_automation
  * @copyright  2014 NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014012400;      // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2013051400;      // Requires this Moodle version
-$plugin->cron      = 3600;            // Period for cron to check this plugin (secs).
+/*
+ * define which events to listen to
+ */
+$handlers = array(
+    'cohort_deleted' => array (
+        'handlerfile'      => '/local/cohort_automation/lib.php',
+        'handlerfunction'  => 'local_cohort_automation_event_delete',
+        'schedule'         => 'instant',
+        'internal'         => 1,
+    ),
+);

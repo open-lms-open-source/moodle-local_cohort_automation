@@ -53,6 +53,7 @@ $string['errorremovemembers'] = 'An error occured while deleting the cohort memb
 
 $string['cohorttable'] = 'Cohort Name';
 $string['profilefieldtable'] = 'Profile Field';
+$string['membercounttable'] = 'Cohort Size';
 $string['regextable']  = 'Regular Expression';
 $string['deletetable'] = 'Delete';
 $string['deletelink'] = 'Delete Mapping';
